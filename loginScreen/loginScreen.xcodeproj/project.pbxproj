@@ -12,6 +12,8 @@
 		64427EA3295327E1009B31BA /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64427EA2295327E1009B31BA /* LoginViewController.swift */; };
 		64427EA8295327E8009B31BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64427EA7295327E8009B31BA /* Assets.xcassets */; };
 		64427EAB295327E8009B31BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64427EA9295327E8009B31BA /* LaunchScreen.storyboard */; };
+		64427EB429532DEC009B31BA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 64427EB329532DEC009B31BA /* SnapKit */; };
+		64ABFE7929536BD500672A53 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64ABFE7829536BD500672A53 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,7 @@
 		64427EA7295327E8009B31BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64427EAA295327E8009B31BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64427EAC295327E8009B31BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64ABFE7829536BD500672A53 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Sources/Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64427EB429532DEC009B31BA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +61,7 @@
 				64427E9E295327E1009B31BA /* AppDelegate.swift */,
 				64427EA0295327E1009B31BA /* SceneDelegate.swift */,
 				64427EA2295327E1009B31BA /* LoginViewController.swift */,
+				64ABFE7829536BD500672A53 /* Extensions.swift */,
 				64427EA7295327E8009B31BA /* Assets.xcassets */,
 				64427EA9295327E8009B31BA /* LaunchScreen.storyboard */,
 				64427EAC295327E8009B31BA /* Info.plist */,
@@ -80,6 +85,9 @@
 			dependencies = (
 			);
 			name = loginScreen;
+			packageProductDependencies = (
+				64427EB329532DEC009B31BA /* SnapKit */,
+			);
 			productName = loginScreen;
 			productReference = 64427E9B295327E1009B31BA /* loginScreen.app */;
 			productType = "com.apple.product-type.application";
@@ -108,6 +116,9 @@
 				Base,
 			);
 			mainGroup = 64427E92295327E1009B31BA;
+			packageReferences = (
+				64427EB229532DEC009B31BA /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 64427E9C295327E1009B31BA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -137,6 +148,7 @@
 				64427EA3295327E1009B31BA /* LoginViewController.swift in Sources */,
 				64427E9F295327E1009B31BA /* AppDelegate.swift in Sources */,
 				64427EA1295327E1009B31BA /* SceneDelegate.swift in Sources */,
+				64ABFE7929536BD500672A53 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +356,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		64427EB229532DEC009B31BA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		64427EB329532DEC009B31BA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 64427EB229532DEC009B31BA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 64427E93295327E1009B31BA /* Project object */;
 }
