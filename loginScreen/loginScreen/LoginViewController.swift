@@ -14,47 +14,79 @@ class LoginViewController: UIViewController {
     private let preferedSubviewsHeight: CGFloat = 60
     private let sideSubviewsIndents = CGSize(width: 60, height: 30)
     
-    // MARK: - Lifecycle
+    // MARK: - UI elements: top stack
         
     private lazy var loginView: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.textColor = .black
-        textField.layer.cornerRadius = 30
-        textField.placeholder = "Login"
+        textField.layer.cornerRadius = preferedSubviewsHeight / 2
+        textField.placeholder = "Name"
         
         textField.leftView = viewWithAttachedImage(withSize: sideSubviewsIndents,
                                                    scale: 0.7,
                                                    imageNamed: "person.png")
-        textField.leftViewMode = .always
         textField.rightView = viewWithAttachedImage(withSize: sideSubviewsIndents,
                                                     scale: 0.7,
                                                     imageNamed: "check.png")
+        textField.leftViewMode = .always
         textField.rightViewMode = .whileEditing
         
         return textField
     }()
     
-    private lazy var paswordView: UITextField = {
+    private lazy var passwordView: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.textColor = .black
-        textField.layer.cornerRadius = 30
+        textField.layer.cornerRadius = preferedSubviewsHeight / 2
         textField.isSecureTextEntry = true
         textField.placeholder = "Password"
         
         textField.leftView = viewWithAttachedImage(withSize: sideSubviewsIndents,
                                                    scale: 0.7,
                                                    imageNamed: "lock.png")
-        textField.leftViewMode = .always
         textField.rightView = viewWithAttachedImage(withSize: sideSubviewsIndents,
                                                     scale: 1,
                                                     imageNamed: "unknown")
+        textField.leftViewMode = .always
         textField.rightViewMode = .always
         
         return textField
 
     }()
+    
+    private lazy var loginButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = preferedSubviewsHeight / 2
+        button.backgroundColor = UIColor(red: 0.43, green: 0.42, blue: 0.83, alpha: 1)
+        button.setTitle("Login", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.textAlignment = .center
+        return button
+    }()
+    
+    // MARK: - UI elements: bottom stack
+    
+    
+    // MARK: - UI elements: stacks
+    
+    private lazy var topStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.layer.borderColor = UIColor.darkGray.cgColor
+        stackView.layer.borderWidth = 2
+        stackView.addSubview(loginView)
+        stackView.addSubview(passwordView)
+        stackView.addSubview(loginButton)
+        return stackView
+    }()
+    
+    private lazy var bottomStack: UIStackView = {
+        let stackView = UIStackView()
+        stackView.backgroundColor = .lightGray
+        return stackView
+    }()
+    
     
     // MARK: - Lifecycle
     
@@ -89,23 +121,36 @@ class LoginViewController: UIViewController {
     }
     
     private func setupHierarchy() {
-        view.addSubview(loginView)
-        view.addSubview(paswordView)
+        view.addSubview(topStack)
     }
     
     private func setupLayout() {
-        loginView.snp.makeConstraints { make in
-            make.centerY.equalTo(view)
-            make.centerX.equalTo(view)
+        topStack.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.width.equalTo(view).multipliedBy(0.8)
-            make.height.equalTo(preferedSubviewsHeight)
+            make.centerX.equalTo(view)
+            make.bottom.equalTo(view).multipliedBy(0.5)
         }
         
-        paswordView.snp.makeConstraints { make in
-            make.top.equalTo(loginView.snp_bottomMargin)
-            make.centerX.equalTo(view)
-            make.width.equalTo(view).multipliedBy(0.8)
+        loginView.snp.makeConstraints { make in
+            make.top.equalTo(20)
+            make.width.equalTo(topStack)
             make.height.equalTo(preferedSubviewsHeight)
+            make.centerX.equalTo(topStack)
+        }
+        
+        passwordView.snp.makeConstraints { make in
+            make.top.equalTo(loginView.snp.bottom)
+            make.width.equalTo(topStack)
+            make.height.equalTo(preferedSubviewsHeight)
+            make.centerX.equalTo(topStack)
+        }
+        
+        loginButton.snp.makeConstraints { make in
+            make.top.equalTo(passwordView.snp.bottom)
+            make.width.equalTo(topStack)
+            make.height.equalTo(preferedSubviewsHeight)
+            make.centerX.equalTo(topStack)
         }
     }
     
