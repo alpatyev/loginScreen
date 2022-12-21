@@ -71,6 +71,10 @@ class LoginViewController: UIViewController {
     
     // MARK: - Setups
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     private func setupView() {
         if let background = UIImage(named: "background.jpg") {
             let imageView = UIImageView(frame: view.bounds)
