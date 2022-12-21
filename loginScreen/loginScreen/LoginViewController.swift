@@ -11,10 +11,19 @@ import SnapKit
 class LoginViewController: UIViewController {
     
     // MARK: - Helpers
-    private let preferedSubviewsHeight: CGFloat = 60
-    private let sideSubviewsIndents = CGSize(width: 60, height: 30)
+    private let preferedSubviewsHeight: CGFloat = 50
+    private let sideSubviewsIndents = CGSize(width: 50, height: 25)
     
     // MARK: - UI elements: top stack
+    
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Login"
+        label.font = .systemFont(ofSize: preferedSubviewsHeight / 2, weight: .heavy)
+        label.textAlignment = .center
+        label.textColor = .white
+        return label
+    }()
         
     private lazy var loginView: UITextField = {
         let textField = UITextField()
@@ -66,6 +75,14 @@ class LoginViewController: UIViewController {
         return button
     }()
     
+    private lazy var forgotButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Forgot your password?", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.textAlignment = .center
+        return button
+    }()
+    
     // MARK: - UI elements: bottom stack
     
     
@@ -73,11 +90,13 @@ class LoginViewController: UIViewController {
     
     private lazy var topStack: UIStackView = {
         let stackView = UIStackView()
-        stackView.layer.borderColor = UIColor.darkGray.cgColor
-        stackView.layer.borderWidth = 2
+        //stackView.layer.borderColor = UIColor.darkGray.cgColor
+        //stackView.layer.borderWidth = 2
+        stackView.addSubview(titleLabel)
         stackView.addSubview(loginView)
         stackView.addSubview(passwordView)
         stackView.addSubview(loginButton)
+        stackView.addSubview(forgotButton)
         return stackView
     }()
     
@@ -132,22 +151,36 @@ class LoginViewController: UIViewController {
             make.bottom.equalTo(view).multipliedBy(0.5)
         }
         
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(preferedSubviewsHeight)
+            make.width.equalTo(topStack)
+            make.height.equalTo(preferedSubviewsHeight)
+            make.centerX.equalTo(topStack)
+        }
+        
         loginView.snp.makeConstraints { make in
-            make.top.equalTo(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(preferedSubviewsHeight)
             make.width.equalTo(topStack)
             make.height.equalTo(preferedSubviewsHeight)
             make.centerX.equalTo(topStack)
         }
         
         passwordView.snp.makeConstraints { make in
-            make.top.equalTo(loginView.snp.bottom)
+            make.top.equalTo(loginView.snp.bottom).offset(preferedSubviewsHeight / 2)
             make.width.equalTo(topStack)
             make.height.equalTo(preferedSubviewsHeight)
             make.centerX.equalTo(topStack)
         }
         
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordView.snp.bottom)
+            make.top.equalTo(passwordView.snp.bottom).offset(preferedSubviewsHeight)
+            make.width.equalTo(topStack)
+            make.height.equalTo(preferedSubviewsHeight)
+            make.centerX.equalTo(topStack)
+        }
+        
+        forgotButton.snp.makeConstraints { make in
+            make.top.equalTo(loginButton.snp.bottom)
             make.width.equalTo(topStack)
             make.height.equalTo(preferedSubviewsHeight)
             make.centerX.equalTo(topStack)
