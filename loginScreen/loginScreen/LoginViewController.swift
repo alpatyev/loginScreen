@@ -11,18 +11,15 @@ import SnapKit
 class LoginViewController: UIViewController {
     
     // MARK: - Helpers
-    private var preferredSubviewsHeight: CGFloat = 50
+    private let preferredSubviewsHeight: CGFloat = 50
     private lazy var sideSubviewsIndents = {
-        CGSize(width: preferredSubviewsHeight,
-               height: preferredSubviewsHeight / 2)
+        CGSize(width: preferredSubviewsHeight, height: preferredSubviewsHeight / 2)
     }()
     
     // MARK: - UI elements: top stack
     
     private lazy var topStack: UIStackView = {
         let stackView = UIStackView()
-        //stackView.layer.borderColor = UIColor.darkGray.cgColor
-        //stackView.layer.borderWidth = 1
         stackView.addSubview(titleLabel)
         stackView.addSubview(loginView)
         stackView.addSubview(passwordView)
@@ -104,8 +101,6 @@ class LoginViewController: UIViewController {
         return button
     }()
     
-    
-    
     // MARK: - UI elements: bottom stacks
     
     private lazy var bottomStack: UIStackView = {
@@ -145,6 +140,7 @@ class LoginViewController: UIViewController {
                                                            height: preferredSubviewsHeight),
                                           scale: 0.32,
                                           imageNamed: "facebook.png")
+        
         let title = UILabel()
         title.text = "Facebook"
         title.textColor = .white
@@ -166,6 +162,7 @@ class LoginViewController: UIViewController {
                                                            height: preferredSubviewsHeight),
                                           scale: 0.32,
                                           imageNamed: "twitter.png")
+        
         let title = UILabel()
         title.text = "Twitter"
         title.textColor = .white
@@ -207,7 +204,7 @@ class LoginViewController: UIViewController {
         setupBottomStackLayout()
     }
     
-    // MARK: - Setups
+    // MARK: - Setup view
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -226,10 +223,14 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // MARK: - Setup hierarchy
+    
     private func setupHierarchy() {
         view.addSubview(topStack)
         view.addSubview(bottomStack)
     }
+    
+    // MARK: - Setup top stack layout
     
     private func setupTopStackLayout() {
         topStack.snp.makeConstraints { make in
@@ -274,6 +275,9 @@ class LoginViewController: UIViewController {
             make.centerX.equalTo(topStack)
         }
     }
+    
+    // MARK: - Setup bottom stack layout: stack
+    
     func setupBottomStackLayout() {
         bottomStack.snp.makeConstraints { make in
             make.bottom.equalTo(view.snp.bottom)
@@ -282,8 +286,8 @@ class LoginViewController: UIViewController {
             make.top.equalTo(view.safeAreaLayoutGuide.snp.centerY)
         }
         
-        // MARK: - Sign up buttom layout
-        
+        // MARK: - Setup bottom stack layout: sign up button
+
         // button view
         
         signUpButton.snp.makeConstraints { make in
@@ -310,8 +314,8 @@ class LoginViewController: UIViewController {
             make.right.lessThanOrEqualTo(signUpButton)
         }
         
-        //MARK: - Connect with facebook/twitter layout
-        
+        // MARK: - Setup bottom stack layout: connect with Facebook/Twitter buttons
+
         // Using Facebook
         
         connectWithFacebookButton.snp.makeConstraints { make in
@@ -340,7 +344,9 @@ class LoginViewController: UIViewController {
             make.left.equalTo(connectWithTwitterButton.subviews[0].snp.right).inset(preferredSubviewsHeight / 4)
         }
         
-        //MARK: - Separator view layout
+        // MARK: - Setup bottom stack layout: separator
+
+        // this view
         
         separatorView.snp.makeConstraints { make in
             make.bottom.equalTo(connectWithFacebookButton.safeAreaLayoutGuide.snp.top)
