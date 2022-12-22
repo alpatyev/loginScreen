@@ -45,6 +45,7 @@ class LoginViewController: UIViewController {
         textField.backgroundColor = .white
         textField.textColor = .black
         textField.layer.cornerRadius = preferredSubviewsHeight / 2
+        textField.createShadowLayer(withCornerradius: preferredSubviewsHeight / 2)
         textField.placeholder = "Name"
         
         textField.leftView = viewWithAttachedImage(withSize: sideSubviewsIndents,
@@ -64,6 +65,7 @@ class LoginViewController: UIViewController {
         textField.backgroundColor = .white
         textField.textColor = .black
         textField.layer.cornerRadius = preferredSubviewsHeight / 2
+        textField.createShadowLayer(withCornerradius: preferredSubviewsHeight / 2)
         textField.isSecureTextEntry = true
         textField.placeholder = "Password"
         
@@ -73,6 +75,7 @@ class LoginViewController: UIViewController {
         textField.rightView = viewWithAttachedImage(withSize: sideSubviewsIndents,
                                                     scale: 1,
                                                     imageNamed: "unknown")
+
         textField.leftViewMode = .always
         textField.rightViewMode = .always
         
@@ -135,6 +138,7 @@ class LoginViewController: UIViewController {
     private lazy var connectWithFacebookButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = preferredSubviewsHeight / 2
+        button.createShadowLayer(withCornerradius: preferredSubviewsHeight / 2)
         button.backgroundColor = UIColor(red: 0.06, green: 0.63, blue: 0.95, alpha: 1.00)
 
         let image = viewWithAttachedImage(withSize: CGSize(width: preferredSubviewsHeight * 1.4,
@@ -155,6 +159,7 @@ class LoginViewController: UIViewController {
     private lazy var connectWithTwitterButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = preferredSubviewsHeight / 2
+        button.createShadowLayer(withCornerradius: preferredSubviewsHeight / 2)
         button.backgroundColor = UIColor(red: 0.33, green: 0.42, blue: 0.71, alpha: 1.00)
 
         let image = viewWithAttachedImage(withSize: CGSize(width: preferredSubviewsHeight * 1.4,
