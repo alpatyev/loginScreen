@@ -24,7 +24,7 @@
 		64427EA7295327E8009B31BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		64427EAA295327E8009B31BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		64427EAC295327E8009B31BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		64ABFE7829536BD500672A53 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Sources/Extensions.swift; sourceTree = "<group>"; };
+		64ABFE7829536BD500672A53 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,15 +58,56 @@
 		64427E9D295327E1009B31BA /* loginScreen */ = {
 			isa = PBXGroup;
 			children = (
-				64427E9E295327E1009B31BA /* AppDelegate.swift */,
-				64427EA0295327E1009B31BA /* SceneDelegate.swift */,
-				64427EA2295327E1009B31BA /* LoginViewController.swift */,
-				64ABFE7829536BD500672A53 /* Extensions.swift */,
-				64427EA7295327E8009B31BA /* Assets.xcassets */,
-				64427EA9295327E8009B31BA /* LaunchScreen.storyboard */,
-				64427EAC295327E8009B31BA /* Info.plist */,
+				6470221A2954DB870064BF8D /* Sources */,
+				647022192954DB6F0064BF8D /* Resources */,
 			);
 			path = loginScreen;
+			sourceTree = "<group>";
+		};
+		647022192954DB6F0064BF8D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				64427EA7295327E8009B31BA /* Assets.xcassets */,
+				64427EAC295327E8009B31BA /* Info.plist */,
+				64427EA9295327E8009B31BA /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6470221A2954DB870064BF8D /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6470221D2954DCF20064BF8D /* App */,
+				6470221C2954DCCE0064BF8D /* Extensions */,
+				6470221B2954DCA30064BF8D /* Controllers */,
+			);
+			name = Sources;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		6470221B2954DCA30064BF8D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				64427EA2295327E1009B31BA /* LoginViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6470221C2954DCCE0064BF8D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				64ABFE7829536BD500672A53 /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6470221D2954DCF20064BF8D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				64427E9E295327E1009B31BA /* AppDelegate.swift */,
+				64427EA0295327E1009B31BA /* SceneDelegate.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,7 +332,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 87G7HNZ9T9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = loginScreen/Info.plist;
+				INFOPLIST_FILE = loginScreen/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -317,7 +358,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 87G7HNZ9T9;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = loginScreen/Info.plist;
+				INFOPLIST_FILE = loginScreen/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

@@ -11,7 +11,7 @@ extension UIViewController {
     
     /// Creates view with attached UIImage if this image exists. Scale represents view's size and must be between 0 and 1. By default image is centered and not resized.
     func viewWithAttachedImage(withSize: CGSize, scale: CGFloat, imageNamed: String) -> UIView {
-        let rectangle = UIView(frame: CGRect(x: 0, y: 0,
+        let rectangle = UIView(frame: CGRect(x: 0,y: 0,
                                              width: withSize.width,
                                              height: withSize.height))
         
@@ -26,7 +26,6 @@ extension UIViewController {
             imageView.center = rectangle.center
             rectangle.addSubview(imageView)
         }
-        
         return rectangle
     }
 }
