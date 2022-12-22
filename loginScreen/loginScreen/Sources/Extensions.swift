@@ -31,3 +31,16 @@ extension UIViewController {
     }
 }
 
+extension UIView {
+    
+    // Creates black shadow with selected corner radius to element
+    func createShadowLayer(withCornerradius: CGFloat, opacity: Float = 0.5) {
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOpacity = opacity
+        self.layer.shadowOffset = .zero
+        self.layer.shadowRadius = withCornerradius
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+    }
+}
+

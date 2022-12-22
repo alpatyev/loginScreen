@@ -87,6 +87,7 @@ class LoginViewController: UIViewController {
         button.setTitle("Login", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.textAlignment = .center
+        button.createShadowLayer(withCornerradius: preferredSubviewsHeight / 2)
         button.addTarget(self, action: #selector(anyAction), for: .touchUpInside)
         return button
     }()
