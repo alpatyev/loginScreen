@@ -11,15 +11,30 @@ import SnapKit
 class LoginViewController: UIViewController {
     
     // MARK: - Helpers
-    private let preferedSubviewsHeight: CGFloat = 50
-    private let sideSubviewsIndents = CGSize(width: 50, height: 25)
+    private var preferredSubviewsHeight: CGFloat = 50
+    private lazy var sideSubviewsIndents = {
+        CGSize(width: preferredSubviewsHeight,
+               height: preferredSubviewsHeight / 2)
+    }()
     
     // MARK: - UI elements: top stack
+    
+    private lazy var topStack: UIStackView = {
+        let stackView = UIStackView()
+        //stackView.layer.borderColor = UIColor.darkGray.cgColor
+        //stackView.layer.borderWidth = 1
+        stackView.addSubview(titleLabel)
+        stackView.addSubview(loginView)
+        stackView.addSubview(passwordView)
+        stackView.addSubview(loginButton)
+        stackView.addSubview(forgotButton)
+        return stackView
+    }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Login"
-        label.font = .systemFont(ofSize: preferedSubviewsHeight / 2, weight: .heavy)
+        label.font = .systemFont(ofSize: preferredSubviewsHeight / 2, weight: .heavy)
         label.textAlignment = .center
         label.textColor = .white
         return label
@@ -29,7 +44,7 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.textColor = .black
-        textField.layer.cornerRadius = preferedSubviewsHeight / 2
+        textField.layer.cornerRadius = preferredSubviewsHeight / 2
         textField.placeholder = "Name"
         
         textField.leftView = viewWithAttachedImage(withSize: sideSubviewsIndents,
@@ -48,7 +63,7 @@ class LoginViewController: UIViewController {
         let textField = UITextField()
         textField.backgroundColor = .white
         textField.textColor = .black
-        textField.layer.cornerRadius = preferedSubviewsHeight / 2
+        textField.layer.cornerRadius = preferredSubviewsHeight / 2
         textField.isSecureTextEntry = true
         textField.placeholder = "Password"
         
@@ -67,11 +82,12 @@ class LoginViewController: UIViewController {
     
     private lazy var loginButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = preferedSubviewsHeight / 2
-        button.backgroundColor = UIColor(red: 0.43, green: 0.42, blue: 0.83, alpha: 1)
+        button.layer.cornerRadius = preferredSubviewsHeight / 2
+        button.backgroundColor = UIColor(red: 0.44, green: 0.41, blue: 0.82, alpha: 1.00)
         button.setTitle("Login", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.textAlignment = .center
+        button.addTarget(self, action: #selector(anyAction), for: .touchUpInside)
         return button
     }()
     
@@ -80,32 +96,100 @@ class LoginViewController: UIViewController {
         button.setTitle("Forgot your password?", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.textAlignment = .center
+        button.addTarget(self, action: #selector(anyAction), for: .touchUpInside)
         return button
     }()
     
-    // MARK: - UI elements: bottom stack
     
     
-    // MARK: - UI elements: stacks
-    
-    private lazy var topStack: UIStackView = {
-        let stackView = UIStackView()
-        //stackView.layer.borderColor = UIColor.darkGray.cgColor
-        //stackView.layer.borderWidth = 2
-        stackView.addSubview(titleLabel)
-        stackView.addSubview(loginView)
-        stackView.addSubview(passwordView)
-        stackView.addSubview(loginButton)
-        stackView.addSubview(forgotButton)
-        return stackView
-    }()
+    // MARK: - UI elements: bottom stacks
     
     private lazy var bottomStack: UIStackView = {
         let stackView = UIStackView()
-        stackView.backgroundColor = .lightGray
+        stackView.addSubview(signUpButton)
+        stackView.addSubview(connectWithFacebookButton)
+        stackView.addSubview(connectWithTwitterButton)
+        stackView.addSubview(separatorView)
         return stackView
     }()
     
+    private lazy var signUpButton: UIView = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.numberOfLines = 1
+        label.text = "Don`t have an account?" + "     "
+        label.textColor = .darkGray
+      
+        let button = UIButton()
+        button.setTitle("Sign up", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(anyAction), for: .touchUpInside)
+        
+        let signUpSpace = UIView()
+        signUpSpace.addSubview(label)
+        signUpSpace.addSubview(button)
+        return signUpSpace
+    }()
+    
+    private lazy var connectWithFacebookButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = preferredSubviewsHeight / 2
+        button.backgroundColor = UIColor(red: 0.06, green: 0.63, blue: 0.95, alpha: 1.00)
+
+        let image = viewWithAttachedImage(withSize: CGSize(width: preferredSubviewsHeight * 1.4,
+                                                           height: preferredSubviewsHeight),
+                                          scale: 0.32,
+                                          imageNamed: "facebook.png")
+        let title = UILabel()
+        title.text = "Facebook"
+        title.textColor = .white
+        
+        button.addSubview(image)
+        button.addSubview(title)
+        button.addTarget(self, action: #selector(anyAction), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var connectWithTwitterButton: UIButton = {
+        let button = UIButton()
+        button.layer.cornerRadius = preferredSubviewsHeight / 2
+        button.backgroundColor = UIColor(red: 0.33, green: 0.42, blue: 0.71, alpha: 1.00)
+
+        let image = viewWithAttachedImage(withSize: CGSize(width: preferredSubviewsHeight * 1.4,
+                                                           height: preferredSubviewsHeight),
+                                          scale: 0.32,
+                                          imageNamed: "twitter.png")
+        let title = UILabel()
+        title.text = "Twitter"
+        title.textColor = .white
+        
+        button.addSubview(image)
+        button.addSubview(title)
+        button.addTarget(self, action: #selector(anyAction), for: .touchUpInside)
+
+        return button
+    }()
+    
+    private lazy var separatorView: UIView = {
+        let attached = UIView()
+        
+        let leftSeparator = UIView()
+        let rigtSeparator = UIView()
+        leftSeparator.backgroundColor = .lightGray
+        rigtSeparator.backgroundColor = .lightGray
+        
+        let centerLabel = UILabel()
+        centerLabel.text = "or connect with"
+        centerLabel.textAlignment = .center
+        centerLabel.textColor = .lightGray
+        
+        attached.addSubview(leftSeparator)
+        attached.addSubview(centerLabel)
+        attached.addSubview(rigtSeparator)
+        
+        return attached
+    }()
     
     // MARK: - Lifecycle
     
@@ -113,11 +197,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupHierarchy()
-        setupLayout()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        setupTopStackLayout()
+        setupBottomStackLayout()
     }
     
     // MARK: - Setups
@@ -135,58 +216,167 @@ class LoginViewController: UIViewController {
             imageView.center = view.center
             view.addSubview(imageView)
         } else {
-            view.backgroundColor = .systemIndigo
+            view.backgroundColor = UIColor(red: 0.44, green: 0.41, blue: 0.82, alpha: 1.00)
         }
     }
     
     private func setupHierarchy() {
         view.addSubview(topStack)
+        view.addSubview(bottomStack)
     }
     
-    private func setupLayout() {
+    private func setupTopStackLayout() {
         topStack.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.width.equalTo(view).multipliedBy(0.8)
             make.centerX.equalTo(view)
-            make.bottom.equalTo(view).multipliedBy(0.5)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.centerY)
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(preferedSubviewsHeight)
+            make.top.equalTo(preferredSubviewsHeight)
             make.width.equalTo(topStack)
-            make.height.equalTo(preferedSubviewsHeight)
+            make.height.equalTo(preferredSubviewsHeight)
             make.centerX.equalTo(topStack)
         }
         
         loginView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(preferedSubviewsHeight)
+            make.top.equalTo(titleLabel.snp.bottom).offset(preferredSubviewsHeight)
             make.width.equalTo(topStack)
-            make.height.equalTo(preferedSubviewsHeight)
+            make.height.equalTo(preferredSubviewsHeight)
             make.centerX.equalTo(topStack)
         }
         
         passwordView.snp.makeConstraints { make in
-            make.top.equalTo(loginView.snp.bottom).offset(preferedSubviewsHeight / 2)
+            make.top.equalTo(loginView.snp.bottom).offset(preferredSubviewsHeight / 2)
             make.width.equalTo(topStack)
-            make.height.equalTo(preferedSubviewsHeight)
+            make.height.equalTo(preferredSubviewsHeight)
             make.centerX.equalTo(topStack)
         }
         
         loginButton.snp.makeConstraints { make in
-            make.top.equalTo(passwordView.snp.bottom).offset(preferedSubviewsHeight)
+            make.top.equalTo(passwordView.snp.bottom).offset(preferredSubviewsHeight)
             make.width.equalTo(topStack)
-            make.height.equalTo(preferedSubviewsHeight)
+            make.height.equalTo(preferredSubviewsHeight)
             make.centerX.equalTo(topStack)
         }
         
         forgotButton.snp.makeConstraints { make in
             make.top.equalTo(loginButton.snp.bottom)
             make.width.equalTo(topStack)
-            make.height.equalTo(preferedSubviewsHeight)
+            make.height.equalTo(preferredSubviewsHeight)
             make.centerX.equalTo(topStack)
+        }
+    }
+    func setupBottomStackLayout() {
+        bottomStack.snp.makeConstraints { make in
+            make.bottom.equalTo(view.snp.bottom)
+            make.centerX.equalTo(view)
+            make.width.equalTo(view).multipliedBy(0.8)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.centerY)
+        }
+        
+        // MARK: - Sign up buttom layout
+        
+        // button view
+        
+        signUpButton.snp.makeConstraints { make in
+            make.bottom.equalTo(bottomStack)
+            make.left.equalTo(signUpButton.subviews[0].snp.left)
+            make.right.equalTo(signUpButton.subviews[1].snp.right)
+            make.height.equalTo(preferredSubviewsHeight * 2)
+            make.centerX.equalTo(bottomStack)
+        }
+        
+        // label
+        
+        signUpButton.subviews[0].snp.makeConstraints { make in
+            make.centerY.equalTo(signUpButton)
+            make.left.equalTo(signUpButton)
+            make.right.equalTo(signUpButton.subviews[1].snp.left)
+        }
+        
+        // actual point of button
+        
+        signUpButton.subviews[1].snp.makeConstraints { make in
+            make.centerY.equalTo(signUpButton)
+            make.left.equalTo(signUpButton.subviews[0].snp.right)
+            make.right.lessThanOrEqualTo(signUpButton)
+        }
+        
+        //MARK: - Connect with facebook/twitter layout
+        
+        // Using Facebook
+        
+        connectWithFacebookButton.snp.makeConstraints { make in
+            make.bottom.equalTo(signUpButton.snp.top)
+            make.left.equalTo(bottomStack.snp.left)
+            make.right.equalTo(bottomStack.snp.centerX).inset(preferredSubviewsHeight / 4)
+            make.height.equalTo(preferredSubviewsHeight)
+        }
+        
+        connectWithFacebookButton.subviews[1].snp.makeConstraints { make in
+            make.centerY.equalTo(connectWithFacebookButton)
+            make.left.equalTo(connectWithFacebookButton.subviews[0].snp.right).inset(preferredSubviewsHeight / 4)
+        }
+        
+        // Using Twitter
+        
+        connectWithTwitterButton.snp.makeConstraints { make in
+            make.bottom.equalTo(signUpButton.snp.top)
+            make.left.equalTo(bottomStack.snp.centerX).offset(preferredSubviewsHeight / 4)
+            make.right.equalTo(bottomStack.snp.right)
+            make.height.equalTo(preferredSubviewsHeight)
+        }
+        
+        connectWithTwitterButton.subviews[1].snp.makeConstraints { make in
+            make.centerY.equalTo(connectWithTwitterButton)
+            make.left.equalTo(connectWithTwitterButton.subviews[0].snp.right).inset(preferredSubviewsHeight / 4)
+        }
+        
+        //MARK: - Separator view layout
+        
+        separatorView.snp.makeConstraints { make in
+            make.bottom.equalTo(connectWithFacebookButton.safeAreaLayoutGuide.snp.top)
+            make.width.equalTo(bottomStack)
+            make.height.equalTo(preferredSubviewsHeight)
+            make.centerX.equalTo(bottomStack)
+        }
+        
+        // left line
+    
+        separatorView.subviews[0].snp.makeConstraints { make in
+            make.centerY.equalTo(separatorView)
+            make.height.equalTo(1.2)
+            make.left.equalTo(separatorView.snp.left)
+            make.right.equalTo(separatorView.subviews[1].snp.left)
+        }
+        
+        // centered label
+        
+        separatorView.subviews[1].snp.makeConstraints { make in
+            make.centerX.equalTo(separatorView)
+            make.centerY.equalTo(separatorView)
+            make.height.equalTo(separatorView)
+            make.width.equalTo(separatorView).multipliedBy(0.4)
+            make.left.equalTo(separatorView.subviews[0].snp.right)
+            make.right.equalTo(separatorView.subviews[2].snp.left)
+        }
+        
+        // right line
+        
+        separatorView.subviews[2].snp.makeConstraints { make in
+            make.centerY.equalTo(separatorView)
+            make.height.equalTo(1.2)
+            make.right.equalTo(separatorView.snp.right)
+            make.left.equalTo(separatorView.subviews[1].snp.right)
         }
     }
     
     // MARK: - Actions
+    
+    @objc func anyAction() {
+        print("some actions..")
+    }
 }
 
